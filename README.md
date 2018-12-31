@@ -5,63 +5,35 @@
 目录结构:
 
 — FONT END REQUEST APIS<br/>
-  — XMLHttpRequest
-
-  — Fetch
-
-— CROSS DOMAIN
-
-  — Ajax规避浏览器同源策略methods
-
-  　 |— 图片ping
-
-  　 |— comet
-
-  　 |— 服务器发送事件(SSE)
-
-  　 |— window.name+iframe
-
-  　 |— window.postMessage()
-
-  　 |— 修改document.domain跨子域
-
-  　 |— 服务器代理
-
-  　 |— JSONP
-
-  　 |— WebSocket
-
-  　 |— SSE与WebSocket
-
-  　 |— CORS
-
-      |— Preflighted Request
-
-      |— Simple Request
-
-      |— Requests with Credential
-
-  — http协议10种请求类型介绍
-
-    |— OPTIONS
-
-    |— HEAD
-
-    |— GET
-
-    |— POST
-
-    |— PUT
-
-    |— DELETE
-
-    |— TRANCE
-
-    |— CONNECT
-
-    |— LINK
-
-    |— UNLINK
+  — XMLHttpRequest<br/>
+  — Fetch<br/>
+— CROSS DOMAIN<br/>
+  — Ajax规避浏览器同源策略methods<br/>
+  　 |— 图片ping<br/>
+  　 |— comet<br/>
+  　 |— 服务器发送事件(SSE)<br/>
+  　 |— window.name+iframe<br/>
+  　 |— window.postMessage()<br/>
+  　 |— 修改document.domain跨子域<br/>
+  　 |— 服务器代理<br/>
+  　 |— JSONP<br/>
+  　 |— WebSocket<br/>
+  　 |— SSE与WebSocket<br/>
+  　 |— CORS<br/>
+      |— Preflighted Request<br/>
+      |— Simple Request<br/>
+      |— Requests with Credential<br/>
+  — http协议10种请求类型介绍<br/>
+    |— OPTIONS<br/>
+    |— HEAD<br/>
+    |— GET<br/>
+    |— POST<br/>
+    |— PUT<br/>
+    |— DELETE<br/>
+    |— TRANCE<br/>
+    |— CONNECT<br/>
+    |— LINK<br/>
+    |— UNLINK<br/>
 
 ## FONT-END REQUEST APIS
 
