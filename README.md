@@ -88,7 +88,7 @@
 
 #### usage
 
-```javascript {cmd='node'}
+```javascript
 // 通过XMLHttpRequest创建请求对象（兼容新老版浏览器）
 function createXHR() {
   if (typeof XMLHttpRequest != 'undefined') {
