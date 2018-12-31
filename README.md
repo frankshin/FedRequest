@@ -158,7 +158,7 @@ function sendAjax(method, url, asy) {
 
 > 图像Ping是与服务器进行简单、单向的跨域通信的一种方式。请求的数据是通过查询字符串形式发送的，而且响应可以是任意内容，但通常是像素图或204响应。通过图像ping，浏览器得不到任何具体的数据，但通过侦听load和error事件，可以知道响应是什么时候接收到的。
 
-```javascript {cmd='node'}
+```javascript
 var img = new Image();
 img.onload = function(){
     console.log('success...');
@@ -177,7 +177,7 @@ img.src = 'xxxxxxxxx';
 
 应用demo：利用图像ping可以初略检测网络延迟：
 
-```javascript {cmd='node'}
+```javascript
 function ping(){
   var statrt = (new Date()).getTime()
   var img = new Image()
@@ -213,7 +213,7 @@ http流：
 
 在Firefox、safari、opera和chrome中，通过侦听readyStatechange事件及检测readyState的值是否为3，就可以利用xhr对象实现HTTP流。在上述浏览器环境中，随着不断从服务器接收数据，readyState的值会周期性地变为3。当readyState值变为3时，responseText属性中就会保存接收到的所有数据。此时，就需要比较之前接收到的数据，决定从什么位置开始取得最新的数据，code如下：
 
-```javascript {cmd='node'}
+```javascript
 function createStreamingClient(url, progress, finished){
   var xhr = new XMLHttpRequest(), received = 0
   xhr.open('get', url, true);
@@ -261,7 +261,7 @@ message：在从服务器接收到新事件时触发。
 
 error：在无法建立连接时触发。
 
-```javascript {cmd='node'}
+```javascript
 source.onmessage = function(event){
   var data = event.data;
   // 数据处理
@@ -331,7 +331,7 @@ Access-Control-Allow-Origin: http://xxxx.com:
 
 eg:
 
-```javascript {cmd='node'}
+```javascript
 // 首先执行请求代码follows：
 var request = new XMLHttpRequest(),
 payload = ......;
@@ -382,7 +382,7 @@ Content-Type: application/xml
 
 带凭证的请求相比简单请求和预检请求，在请求发送时多了y用户凭证（[withCredentials](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/withCredentials)）
 
-```javascript {cmd='node'}
+```javascript
 // 带withCredentials的前端请求代码：
 var request = new XMLHttpRequest();
 request.open('GET', 'http://frankshin.com/someData', true);
