@@ -4,13 +4,13 @@
 
 目录结构:
 
-— FONT END REQUEST APIS
+— FONT END REQUEST APIS
 
   — XMLHttpRequest
 
   — Fetch
 
-— CROSS DOMAIN
+— CROSS DOMAIN
 
   — Ajax规避浏览器同源策略methods
 
