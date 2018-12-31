@@ -187,12 +187,12 @@ Access-Control-Allow-Origin: http://xxxx.com:
 
 1、请求类型除GET,HEAD或POST以外的任何一种类型；
 
-2、请求类型POST，Content-Type不是application/x-www-form-urlencoded，multipart/form-data或text/plain之一.
+2、请求类型POST，Content-Type不是application/x-www-form-urlencoded，multipart/form-data或text/plain之一.
 
 eg:
 
 ```javascript {cmd='node'}
-// 首先执行请求代码follows：
+// 首先执行请求代码follows：
 var request = new XMLHttpRequest(),
 payload = ......;
 request.open('POST', 'http://frankshin/someData', true);
