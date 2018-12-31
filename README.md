@@ -185,7 +185,8 @@ Access-Control-Allow-Origin: http://xxxx.com:
 
 ##### Preflighted Request
 
-1、请求类型除GET，HEAD或POST以外的任何一种类型；
+1、请求类型除GET,HEAD或POST以外的任何一种类型；
+
 2、请求类型POST，Content-Type不是application/x-www-form-urlencoded，multipart/form-data或text/plain之一.
 
 eg:
@@ -207,20 +208,20 @@ Origin: http://frankshin.com
 Access-Control-Request-Method: POST
 Access-Control-Request-Headers: TEST-CROESS-HEADER
 
-// 服务端相应头：
+// 服务端相应头：
 HTTP/1.1 200 OK
 Access-Control-Allow-Origin: http://frankshin.com
 Access-Control-Allow-Methods: POST, GET, OPTIONS
 Access-Control-Allow-Headers: TEST-CROESS-HEADER
 
-// 接着，浏览器会分析这个返回数据（Response Headers）,如果发现是被允许的请求后，浏览器会开始向服务端发送真正的post请求，follows：
+// 接着，浏览器会分析这个返回数据（Response Headers）,如果发现是被允许的请求后，浏览器会开始向服务端发送真正的post请求，follows：
 POST /someData/ HTTP/1.1
-Host: frankshin.com
+Host: frankshin.com
 TEST-CROESS-HEADER: value
 ......
 [Payload Here]
 
-// 服务端接着处理并返回
+// 服务端接着处理并返回
 HTTP/1.1 200 OK
 Access-Control-Allow-Origin: http://frankshin.com
 Content-Type: application/xml
@@ -231,7 +232,8 @@ Content-Type: application/xml
 
 ##### Simple Request
 
-1、请求类型是GET，HEAD或POST之一，没有包含任何自定义请求头；
+1、请求类型是GET，HEAD或POST之一，没有包含任何自定义请求头；
+
 2、使用POST作为请求，该请求的Content-Type是application/x-www-form-urlencoded，multipart/form-data或text/plain之一。
 
 ##### Requests with Credential
@@ -280,6 +282,6 @@ Content-Type: application/xml
 
 #### UNLINK
 
-## 参考资料
+## 参考资料
 
 [cors简介](https://www.cnblogs.com/loveis715/p/4592246.html)
