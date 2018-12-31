@@ -186,16 +186,16 @@ Access-Control-Allow-Headers: TEST-CROESS-HEADER
 // 接着，浏览器会分析这个返回数据（Response Headers）,如果发现是被允许的请求后，浏览器会开始向服务端发送真正的post请求，follows：
 POST /someData/ HTTP/1.1
 Host: frankshin.com
-3 TEST-CROESS-HEADER: value
-4 ......
-6 [Payload Here]
+TEST-CROESS-HEADER: value
+......
+[Payload Here]
 
 // 服务端接着处理并返回
-1 HTTP/1.1 200 OK
-2 Access-Control-Allow-Origin: http://frankshin.com
-3 Content-Type: application/xml
-4 ......
-6 [Payload Here]
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://frankshin.com
+Content-Type: application/xml
+......
+[Payload Here]
 
 ```
 
@@ -205,6 +205,26 @@ Host: frankshin.com
 2、使用POST作为请求，该请求的Content-Type是application/x-www-form-urlencoded，multipart/form-data或text/plain之一。
 
 ##### Requests with Credential
+
+> XMLHttpRequest.withCredentials  属性是一个Boolean类型，它指示了是否该使用类似cookies,authorization headers(头部授权)或者TLS客户端证书这一类资格证书来创建一个跨站点访问控制（cross-site Access-Control）请求。在同一个站点下使用withCredentials属性是无效的。如果在发送来自其他域的XMLHttpRequest请求之前，未设置withCredentials 为true，那么就不能为它自己的域设置cookie值
+
+带凭证的请求相比简单请求和预检请求，在请求发送时多了y用户凭证（[withCredentials](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/withCredentials)）
+
+```javascript {cmd='node'}
+// 带withCredentials的前端请求代码：
+var request = new XMLHttpRequest();
+request.open('GET', 'http://frankshin.com/someData', true);
+request.withCredentials = true;
+request.onreadystatechange = handler;
+request.send();
+
+// 服务端的返回x响应头
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://frankshin.com
+Content-Type: application/xml
+......
+[Payload Here]
+```
 
 一个跨域请求包含了当前页面的用户凭证，那么其就属于Requests with Credential（ps：一般情况下，一个跨域请求不会包含当前页面的用户凭证）。
 
