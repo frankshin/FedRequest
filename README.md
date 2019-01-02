@@ -5,10 +5,10 @@
 ```
 目录结构:
 — FONT END REQUEST APIS
-  — XMLHttpRequest
-  — Fetch
+  |— XMLHttpRequest
+  |— Fetch
 — CROSS DOMAIN
-  — Ajax规避浏览器同源策略methods
+  |— Ajax规避浏览器同源策略methods
   　 |— 图片ping
   　 |— comet
   　 |— 服务器发送事件(SSE)
@@ -23,17 +23,17 @@
       |— Preflighted Request
       |— Simple Request
       |— Requests with Credential
-  — http协议10种请求类型介绍
-    |— OPTIONS
-    |— HEAD
-    |— GET
-    |— POST
-    |— PUT
-    |— DELETE
-    |— TRANCE
-    |— CONNECT
-    |— LINK
-    |— UNLINK
+— http协议10种请求类型介绍
+  |— OPTIONS
+  |— HEAD
+  |— GET
+  |— POST
+  |— PUT
+  |— DELETE
+  |— TRANCE
+  |— CONNECT
+  |— LINK
+  |— UNLINK
 ```
 
 ## FONT-END REQUEST APIS
@@ -120,7 +120,60 @@ function sendAjax(method, url, asy) {
 
 #### usage
 
->
+1 response返回数据对象：
+fetch规范定义的response对象具有如下方法：
+arrayBuffer()
+blob()
+json()
+text()
+formData()
+
+2 关于cookie
+Fetch 跨域请求时默认不会带 cookie，需要时得手动指定 credentials: 'include'，类比XHR的withCredentials: true
+eg follows：
+
+```javascript
+fetch('url', {
+  credentials: 'include'
+})
+.then(function(res){
+  ...
+})
+```
+
+3 fetch获取http头信息
+
+```javascript
+fetch('url').then(function(response) {
+  console.log(response.headers.get('Content-Type'))
+  console.log(response.headers.get('Date'))
+})
+```
+
+4 fetch链式调用
+
+```javascript
+function status(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return Promise.resolve(response)
+  } else {
+    return Promise.reject(new Error(response.statusText))
+  }
+}
+
+function json(response) {
+  return response.json()
+}
+
+fetch('doAct.action')
+  .then(status)
+  .then(json)
+  .then(function(data) {
+    console.log('Request succeeded with JSON response', data)
+  }).catch(function(error) {
+    console.log('Request failed', error)
+  })
+```
 
 ## CROSS DOMAIN
 
@@ -372,17 +425,17 @@ Content-Type: application/xml
 
 一个跨域请求包含了当前页面的用户凭证，那么其就属于Requests with Credential（ps：一般情况下，一个跨域请求不会包含当前页面的用户凭证）。
 
-### http协议10种请求类型介绍
+## http协议10种请求类型介绍
 
-#### OPTIONS
+### OPTIONS
 
 > 说明：询问服务器支持的方法,支持的http协议版本: 1.0、1.1
 
-#### HEAD
+### HEAD
 
 > 说明：获得报文首部,支持的http协议版本: 1.0、1.1
 
-#### GET
+### GET
 
 > 说明：获取资源,支持的http协议版本: 1.0、1.1
 
@@ -390,13 +443,13 @@ get的常见参数提交方式为Query String Parameter，如下图：
 
 ![](https://smallpang.oss-cn-shanghai.aliyuncs.com/blog/images/1098800-20180626185813168-647235402.png)
 
-#### POST
+### POST
 
 > 传输实体主体,支持的http协议版本: 1.0、1.1
 
 HTTP 协议是以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规范。规范把 HTTP 请求分为三个部分：状态行、请求头、消息主体，协议规定 POST 提交的数据必须放在消息主体（entity-body）中，但协议并没有规定数据必须使用什么编码方式。实际上，开发者完全可以自己决定消息主体的格式，只要最后发送的 HTTP 请求满足上面的格式就可以
 
-##### 1 application/x-www-form-urlencoded
+#### 1 application/x-www-form-urlencoded
 
 > 即参数提交方式application/x-www-form-urlencoded
 
@@ -406,13 +459,13 @@ HTTP 协议是以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规
 
 ![](https://smallpang.oss-cn-shanghai.aliyuncs.com/blog/images/1098800-20180626184726974-155389537.png)
 
-##### 2 multipart/form-data
+#### 2 multipart/form-data
 
 > 即参数提交方式multipart/form-data
 
 这种方式一般用来上传文件，各大服务端语言对它也有着良好的支持。
 
-##### 3 application/json
+#### 3 application/json
 
 > 参数提交方式application/json
 
@@ -422,33 +475,33 @@ HTTP 协议是以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规
 
 ![](https://smallpang.oss-cn-shanghai.aliyuncs.com/blog/images/1098800-20180626192143334-1218422902.png)
 
-##### 4 text/xml
+#### 4 text/xml
 
 > 即参数提交方式text/xml
 
 一种使用HTTP作为传输协议，XML作为编码方式的远程调用规范，不过XML结构还是过于臃肿，一般场景用JSON会更灵活方便
 
-#### PUT
+### PUT
 
 > 传输文件, 支持的http协议版本: 1.0、1.1
 
-#### DELETE
+### DELETE
 
 > 删除文件, 支持的http协议版本: 1.0、1.1
 
-#### TRANCE
+### TRANCE
 
 > 追踪路径,支持的http协议版本: 1.1
 
-#### CONNECT
+### CONNECT
 
 > 要求用隧道协议连接代理,支持的http协议版本: 1.1
 
-#### LINK
+### LINK
 
 > 说明：建立和资源之间的联系,支持的http协议版本: 1.0
 
-#### UNLINK
+### UNLINK
 
 > 断开连接关系,支持的http协议版本: 1.0
 
@@ -461,3 +514,4 @@ HTTP 协议是以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规
 [cors简介](https://www.cnblogs.com/loveis715/p/4592246.html)
 
 《javacript高级程序设计》
+[fetch:下一代ajax技术](https://www.cnblogs.com/snandy/p/5076512.html)
