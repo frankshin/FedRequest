@@ -114,13 +114,32 @@ function sendAjax(method, url, asy) {
 
 ### Fetch
 
+> fetch api是一个用以请求数据的简洁接口，相比XMLHttpRequest需要额外的逻辑（如：处理重定向）而言，fetch在发送站点请求以及处理返回数据上更加简单
+
 #### 历史回顾
 
 >
 
 #### usage
 
-1 response返回数据对象：
+-检测浏览器是否支持fetch
+
+```javascript
+if(!('fetch' in window)) {
+  console.log('fetch api not found, try including the polyfill')
+  return
+}
+```
+
+-腻子库
+[polyfill](https://github.com/github/fetch)for browsers are not currently supported
+
+```javascript
+import 'whatwg-fetch'
+window.fetch(...)
+```
+
+-response返回数据对象：
 fetch规范定义的response对象具有如下方法：
 arrayBuffer()
 blob()
@@ -128,7 +147,7 @@ json()
 text()
 formData()
 
-2 关于cookie
+-关于cookie
 Fetch 跨域请求时默认不会带 cookie，需要时得手动指定 credentials: 'include'，类比XHR的withCredentials: true
 eg follows：
 
@@ -141,7 +160,7 @@ fetch('url', {
 })
 ```
 
-3 fetch获取http头信息
+-fetch获取http头信息
 
 ```javascript
 fetch('url').then(function(response) {
@@ -150,7 +169,19 @@ fetch('url').then(function(response) {
 })
 ```
 
-4 fetch链式调用
+-发起请求
+
+```javascript
+fetch('examples/example.json')
+.then(function(response) {
+  // Do stuff with the response
+})
+.catch(function(error) {
+  console.log('Looks like there was a problem: \n', error);
+})
+```
+
+-fetch链式调用
 
 ```javascript
 function status(response) {
@@ -512,6 +543,6 @@ HTTP 协议是以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规
 ## 参考资料
 
 [cors简介](https://www.cnblogs.com/loveis715/p/4592246.html)
-
 《javacript高级程序设计》
+[Working with the Fetch API](https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api)
 [fetch:下一代ajax技术](https://www.cnblogs.com/snandy/p/5076512.html)
