@@ -122,7 +122,7 @@ function sendAjax(method, url, asy) {
 
 #### usage
 
--检测浏览器是否支持fetch
+- 检测浏览器是否支持fetch
 
 ```javascript
 if(!('fetch' in window)) {
@@ -131,7 +131,8 @@ if(!('fetch' in window)) {
 }
 ```
 
--腻子库
+- 腻子库
+
 [polyfill](https://github.com/github/fetch)for browsers are not currently supported
 
 ```javascript
@@ -139,7 +140,8 @@ import 'whatwg-fetch'
 window.fetch(...)
 ```
 
--response返回数据对象：
+- response返回数据对象：
+
 fetch规范定义的response对象具有如下方法：
 arrayBuffer()
 blob()
@@ -147,7 +149,8 @@ json()
 text()
 formData()
 
--关于cookie
+- 关于cookie
+
 Fetch 跨域请求时默认不会带 cookie，需要时得手动指定 credentials: 'include'，类比XHR的withCredentials: true
 eg follows：
 
@@ -160,7 +163,7 @@ fetch('url', {
 })
 ```
 
--fetch获取http头信息
+- fetch获取http头信息
 
 ```javascript
 fetch('url').then(function(response) {
@@ -169,19 +172,38 @@ fetch('url').then(function(response) {
 })
 ```
 
--发起请求
+- 发起请求
 
 ```javascript
-fetch('examples/example.json')
-.then(function(response) {
-  // Do stuff with the response
-})
-.catch(function(error) {
-  console.log('Looks like there was a problem: \n', error);
-})
+postData('http://example.com/answer', {answer: 42})
+  .then(data => console.log(data)) // JSON from `response.json()` call
+  .catch(error => console.error(error))
+
+function postData(url, data) {
+  // Default options are marked with *
+  return fetch(url, {
+    body: JSON.stringify(data), // must match 'Content-Type' header
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    // credentials: 'same-origin': 只在请求URL与调用脚本位于同一起源处时发送凭据
+    // credentials: 'omit':确保浏览器不在请求中包含凭据
+    credentials: 'same-origin', // include, same-origin, *omit
+    headers: {
+      'user-agent': 'Mozilla/4.0 MDN Example',
+      'content-type': 'application/json'
+    },
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, cors, *same-origin
+    redirect: 'follow', // manual, *follow, error
+    referrer: 'no-referrer', // *client, no-referrer
+  })
+  .then(response => response.json()) // parses response to JSON
+  .catch(function(error) {
+    console.log('Looks like there was a problem: \n', error);
+  })
+}
 ```
 
--fetch链式调用
+- fetch链式调用
 
 ```javascript
 function status(response) {
