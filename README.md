@@ -172,7 +172,7 @@ fetch('url').then(function(response) {
 })
 ```
 
-- 发起请求
+- 发起请求说明
 
 ```javascript
 postData('http://example.com/answer', {answer: 42})
@@ -201,6 +201,23 @@ function postData(url, data) {
     console.log('Looks like there was a problem: \n', error);
   })
 }
+```
+
+- 上传文件
+
+```javascript
+// Files can be uploaded using an HTML <input type="file" /> input element, FormData() and fetch()
+var formData = new FormData();
+var fileField = document.querySelector("input[type='file']");
+formData.append('username', 'abc123');
+formData.append('avatar', fileField.files[0]);
+fetch('https://example.com/profile/avatar', {
+  method: 'PUT',
+  body: formData
+})
+.then(response => response.json())
+.catch(error => console.error('Error:', error))
+.then(response => console.log('Success:', response));
 ```
 
 - fetch链式调用
@@ -568,3 +585,4 @@ HTTP 协议是以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规
 《javacript高级程序设计》
 [Working with the Fetch API](https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api)
 [fetch:下一代ajax技术](https://www.cnblogs.com/snandy/p/5076512.html)
+[使用fetch](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch)
