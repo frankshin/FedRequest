@@ -397,6 +397,25 @@ id：1
 
 #### nginx服务器代理
 
+因为服务器之间没有跨域,所以能够请求到数据
+
+nginx配置demo：
+
+```javascript
+server {
+  listen 80;
+  server_name www.domain.com;
+  #access_log  /var/log/nginx/z.dian.so.access.log;
+  location / {
+    # 这里使用代理服务器61.200.166.130进行请求www.domain.com
+    proxy_set_header Host www.domain.com;
+    add_header 'Access-Control-Allow-Origin' 'http://www.domain.com';
+    add_header 'Access-Control-Allow-Credentials' 'true';
+    proxy_pass http://61.200.166.130;
+  }
+}
+```
+
 #### JSONP
 
 #### WebSocket
