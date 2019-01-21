@@ -399,20 +399,33 @@ id：1
 
 因为服务器之间没有跨域,所以能够请求到数据
 
-nginx配置demo：
+##### nginx配置demo：
 
 ```javascript
+// 这里使用代理服务器61.200.166.130进行请求www.domain.com
 server {
   listen 80;
   server_name www.domain.com;
-  #access_log  /var/log/nginx/z.dian.so.access.log;
+  # access_log  /var/log/nginx/www.domain.com.access.log;
   location / {
-    # 这里使用代理服务器61.200.166.130进行请求www.domain.com
     proxy_set_header Host www.domain.com;
     add_header 'Access-Control-Allow-Origin' 'http://www.domain.com';
     add_header 'Access-Control-Allow-Credentials' 'true';
     proxy_pass http://61.200.166.130;
   }
+}
+
+// another scenes
+server
+{
+  listen 80;
+  server_name www.aaa.top;
+  location / {
+    proxy_pass http://www.bbb.com;
+    add_header 'Access-Control-Allow-Origin' '*';
+    add_header 'Access-Control-Allow-Credentials' 'true';
+  }
+  ##### other directive
 }
 ```
 
