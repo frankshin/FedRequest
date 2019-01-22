@@ -118,7 +118,7 @@ function sendAjax(method, url, asy) {
 
 #### 历史回顾
 
->
+Fetch目前还不是W3C规范，由[whatwg](https://en.wikipedia.org/wiki/WHATWG)(Web Hypertext Application Technology Working Group 超文本应用技术工作组)负责出品
 
 #### usage
 
@@ -142,27 +142,13 @@ window.fetch(...)
 
 - response返回数据对象：
 
-```
 fetch规范定义的response对象具有如下方法：
-arrayBuffer()
+```
+arrayBuffer()
 blob()
 json()
 text()
 formData()
-```
-
-- 关于cookie
-
-Fetch 跨域请求时默认不会带 cookie，需要时得手动指定 credentials: 'include'，类比XHR的withCredentials: true
-eg follows：
-
-```javascript
-fetch('url', {
-  credentials: 'include'
-})
-.then(function(res){
-  ...
-})
 ```
 
 - fetch获取http头信息
@@ -186,6 +172,7 @@ function postData(url, data) {
   return fetch(url, {
     body: JSON.stringify(data), // must match 'Content-Type' header
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    // credentials: 'include'  Fetch 跨域请求时默认不会带 cookie，需要时得手动指定 credentials: 'include'，类比XHR的withCredentials: true
     // credentials: 'same-origin': 只在请求URL与调用脚本位于同一起源处时发送凭据
     // credentials: 'omit':确保浏览器不在请求中包含凭据
     credentials: 'same-origin', // include, same-origin, *omit
