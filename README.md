@@ -15,7 +15,7 @@
   　 |— window.name+iframe
   　 |— window.postMessage()
   　 |— 修改document.domain跨子域
-  　 |— 服务器代理
+  　 |— nginx反向代理
   　 |— JSONP
   　 |— WebSocket
   　 |— SSE与WebSocket
@@ -122,7 +122,7 @@ function sendAjax(method, url, asy) {
 
 #### usage
 
-- 检测浏览器是否支持fetch
+- 检测浏览器是否支持fetch
 
 ```javascript
 if(!('fetch' in window)) {
@@ -142,12 +142,14 @@ window.fetch(...)
 
 - response返回数据对象：
 
-fetch规范定义的response对象具有如下方法：
+```
+fetch规范定义的response对象具有如下方法：
 arrayBuffer()
 blob()
 json()
 text()
 formData()
+```
 
 - 关于cookie
 
@@ -395,7 +397,9 @@ id：1
 
 #### 修改document.domain跨子域
 
-#### nginx服务器代理
+#### nginx反向代理服务器
+
+> 反向代理（Reverse Proxy）方式是指以代理服务器来接受Internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给Internet上请求连接的客户端
 
 因为服务器之间没有跨域,所以能够请求到数据
 
