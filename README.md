@@ -7,20 +7,20 @@
 — FONT END REQUEST APIS
   |— XMLHttpRequest
   |— Fetch
-  |— 当前流行的ajax库剖析
+  |— 当前流行的ajax库剖析
      |— axios
 — CROSS DOMAIN
-　 |— 图片ping
-　 |— comet
-　 |— 服务器发送事件(SSE)
-　 |— window.name+iframe
-　 |— window.postMessage()
-　 |— 修改document.domain跨子域
-　 |— nginx反向代理
-　 |— JSONP
-　 |— WebSocket
-　 |— SSE与WebSocket
-　 |— CORS
+　|— 图片ping
+　|— comet
+　|— 服务器发送事件(SSE)
+　|— window.name+iframe
+　|— window.postMessage()
+　|— 修改document.domain跨子域
+　|— nginx反向代理
+　|— JSONP
+　|— WebSocket
+　|— SSE与WebSocket
+　|— CORS
     |— Preflighted Request
     |— Simple Request
     |— Requests with Credential
