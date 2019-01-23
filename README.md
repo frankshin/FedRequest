@@ -7,22 +7,23 @@
 — FONT END REQUEST APIS
   |— XMLHttpRequest
   |— Fetch
+  |— 当前流行的ajax库剖析
+     |— axios
 — CROSS DOMAIN
-  |— Ajax规避浏览器同源策略methods
-  　 |— 图片ping
-  　 |— comet
-  　 |— 服务器发送事件(SSE)
-  　 |— window.name+iframe
-  　 |— window.postMessage()
-  　 |— 修改document.domain跨子域
-  　 |— nginx反向代理
-  　 |— JSONP
-  　 |— WebSocket
-  　 |— SSE与WebSocket
-  　 |— CORS
-      |— Preflighted Request
-      |— Simple Request
-      |— Requests with Credential
+　 |— 图片ping
+　 |— comet
+　 |— 服务器发送事件(SSE)
+　 |— window.name+iframe
+　 |— window.postMessage()
+　 |— 修改document.domain跨子域
+　 |— nginx反向代理
+　 |— JSONP
+　 |— WebSocket
+　 |— SSE与WebSocket
+　 |— CORS
+    |— Preflighted Request
+    |— Simple Request
+    |— Requests with Credential
 — http协议10种请求类型介绍
   |— OPTIONS
   |— HEAD
@@ -175,14 +176,14 @@ function postData(url, data) {
     // credentials: 'include'  Fetch 跨域请求时默认不会带 cookie，需要时得手动指定 credentials: 'include'，类比XHR的withCredentials: true
     // credentials: 'same-origin': 只在请求URL与调用脚本位于同一起源处时发送凭据
     // credentials: 'omit':确保浏览器不在请求中包含凭据
-    credentials: 'same-origin', // include, same-origin, *omit
+    credentials: 'same-origin',
     headers: {
       'user-agent': 'Mozilla/4.0 MDN Example',
       'content-type': 'application/json'
     },
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, cors, *same-origin
-    redirect: 'follow', // manual, *follow, error
+    method: 'POST',          // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors',            // no-cors, cors, *same-origin
+    redirect: 'follow',      // manual, *follow, error
     referrer: 'no-referrer', // *client, no-referrer
   })
   .then(response => response.json()) // parses response to JSON
@@ -234,11 +235,15 @@ fetch('doAct.action')
   })
 ```
 
+#### fetch vs xhr
+
+### 当前流行的ajax库剖析
+
+#### axios
+
 ## CROSS DOMAIN
 
-### Ajax规避浏览器同源策略methods
-
-#### 图片ping
+### 图片ping
 
 > 图像Ping是与服务器进行简单、单向的跨域通信的一种方式。请求的数据是通过查询字符串形式发送的，而且响应可以是任意内容，但通常是像素图或204响应。通过图像ping，浏览器得不到任何具体的数据，但通过侦听load和error事件，可以知道响应是什么时候接收到的。
 
@@ -277,7 +282,7 @@ function ping(){
 
 ```
 
-#### comet
+### comet
 
 Comet是Alex Russell发明的一个技术名词，指的是一种基于服务器推送的更高级的Ajax技术，与普通Ajax从页面向服务器请求数据相比，Comet则是由服务器向页面推送数据。
 
@@ -325,7 +330,7 @@ var client = createStreamingClient(api, function(res){
 
 ```
 
-#### 服务器发送事件(SSE)
+### 服务器发送事件(SSE)
 
 > SSE是围绕只读Comet交互推出的API或模式。SSE API用于创建到服务器的单向连接，服务器通过这个连接可以发送任意数量的数据。服务器响应的MIME类型必须是test/event-stream。而且是浏览器中的javascript API能解析格式输出。SSE支持短轮询、长轮询和http流。而且能在断开连接时自动确定何时重新连接。
 
@@ -378,19 +383,19 @@ id：1
 
 设置了id后，EventSource对象会跟踪上一次触发的事件。如果连接断开，会向服务器发送一个包含名为last-event-id的特殊http头部请求，以便服务器知道下一次该触发哪个事件。在对此连接的事件流中，这种机制可以确保浏览器以正确的顺序收到连接的数据段。
 
-#### window.name+iframe
+### window.name+iframe
 
-#### window.postMessage()
+### window.postMessage()
 
-#### 修改document.domain跨子域
+### 修改document.domain跨子域
 
-#### nginx反向代理服务器
+### nginx反向代理服务器
 
 > 反向代理（Reverse Proxy）方式是指以代理服务器来接受Internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给Internet上请求连接的客户端
 
 因为服务器之间没有跨域,所以能够请求到数据
 
-##### nginx配置demo：
+#### nginx配置demo：
 
 ```javascript
 // 这里使用代理服务器61.200.166.130进行请求www.domain.com
@@ -420,13 +425,13 @@ server
 }
 ```
 
-#### JSONP
+### JSONP
 
-#### WebSocket
+### WebSocket
 
-#### SSE与WebSocket
+### SSE与WebSocket
 
-#### CORS
+### CORS
 
 For security reasons, browsers restrict cross-origin HTTP requests initiated from within scripts. For example, XMLHttpRequest and the Fetch API follow the same-origin policy. This means that a web application using those APIs can only request HTTP resources from the same origin the application was loaded from, unless the response from the other origin includes the right CORS headers(details see the follows demo).
 
@@ -434,14 +439,14 @@ The CORS mechanism supports secure cross-origin requests and data transfers betw
 
 details here: [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 
-##### 原理解析 & demo
+#### 原理解析 & demo
 
 ![](https://smallpang.oss-cn-shanghai.aliyuncs.com/blog/images/CORS_pri.png)
 
 Access-Control-Allow-Origin: http://xxxx.com:
 该响应头用来记录可以访问该资源的域。在接收到服务端响应后，浏览器将会查看响应中是否包含Access-Control-Allow-Origin响应头。如果该响应头存在，那么浏览器会分析该响应头中所标示的内容。如果其包含了当前页面所在的域，那么浏览器就将知道这是一个被允许的跨域访问，从而不再根据Same-origin Policy来限制用户对该数据的访问
 
-##### Preflighted Request
+#### Preflighted Request
 
 1、请求类型除GET,HEAD或POST以外的任何一种类型；
 
@@ -488,13 +493,13 @@ Content-Type: application/xml
 
 ```
 
-##### Simple Request
+#### Simple Request
 
 1、请求类型是GET，HEAD或POST之一，没有包含任何自定义请求头；
 
 2、使用POST作为请求，该请求的Content-Type是application/x-www-form-urlencoded，multipart/form-data或text/plain之一。
 
-##### Requests with Credential
+#### Requests with Credential
 
 > XMLHttpRequest.withCredentials  属性是一个Boolean类型，它指示了是否该使用类似cookies,authorization headers(头部授权)或者TLS客户端证书这一类资格证书来创建一个跨站点访问控制（cross-site Access-Control）请求。在同一个站点下使用withCredentials属性是无效的。如果在发送来自其他域的XMLHttpRequest请求之前，未设置withCredentials 为true，那么就不能为它自己的域设置cookie值
 
