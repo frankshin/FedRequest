@@ -7,6 +7,9 @@
 — FONT END REQUEST APIS
   |— XMLHttpRequest
   |— Fetch
+     |— 历史
+     |— usage
+     |— 存在的问题
   |— 当前流行的ajax库剖析
      |— axios
 — CROSS DOMAIN
@@ -117,7 +120,7 @@ function sendAjax(method, url, asy) {
 
 > fetch api是一个用以请求数据的简洁接口，相比XMLHttpRequest需要额外的逻辑（如：处理重定向）而言，fetch在发送站点请求以及处理返回数据上更加简单
 
-#### 历史回顾
+#### 历史
 
 Fetch目前还不是W3C规范，由[whatwg](https://en.wikipedia.org/wiki/WHATWG)(Web Hypertext Application Technology Working Group 超文本应用技术工作组)负责出品
 
@@ -144,11 +147,17 @@ window.fetch(...)
 - response返回数据对象：
 
 fetch规范定义的response对象具有如下方法：
-```
+
+```javascript
+//
 arrayBuffer()
+//
 blob()
+//
 json()
+// 
 text()
+//
 formData()
 ```
 
@@ -186,7 +195,13 @@ function postData(url, data) {
     redirect: 'follow',      // manual, *follow, error
     referrer: 'no-referrer', // *client, no-referrer
   })
-  .then(response => response.json()) // parses response to JSON
+  .then(response => {
+    if (response.status >= 200 && response.status < 300) {
+      return Promise.resolve(response)
+    } else {
+      return Promise.reject(new Error(response.statusText))
+    }
+  })
   .catch(function(error) {
     console.log('Looks like there was a problem: \n', error);
   })
@@ -213,27 +228,26 @@ fetch('https://example.com/profile/avatar', {
 - fetch链式调用
 
 ```javascript
-function status(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return Promise.resolve(response)
-  } else {
-    return Promise.reject(new Error(response.statusText))
-  }
-}
-
-function json(response) {
-  return response.json()
-}
-
 fetch('doAct.action')
-  .then(status)
-  .then(json)
+  .then((response) => {
+    if (response.status >= 200 && response.status < 300) {
+      return Promise.resolve(response)
+    } else {
+      return Promise.reject(new Error(response.statusText))
+    }
+  })
+  .then((response) => {
+    return response.json()
+  })
   .then(function(data) {
     console.log('Request succeeded with JSON response', data)
-  }).catch(function(error) {
+  })
+  .catch(function(error) {
     console.log('Request failed', error)
   })
 ```
+
+#### 存在的问题
 
 #### fetch vs xhr
 
