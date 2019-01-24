@@ -6,38 +6,38 @@
 
 - FONT END REQUEST APIS
   - [XMLHttpRequest](#XMLHttpRequest)
-    - Fetch
-      - 历史
-      - usage
-      - 存在的问题
-    - 当前流行的ajax库剖析
-      - axios
+    - [Fetch](#fetch)
+      - [history](#history)
+      - [usage](#usage)
+      - [存在的问题](#存在的问题)
+    - [当前流行的ajax库剖析](#当前流行的ajax库剖析)
+      - [axios](#axios)
   - [CROSS DOMAIN](#CROSS-DOMAIN)
-    - 图片ping
-    - comet
-    - 服务器发送事件(SSE)
-    - window.name+iframe
-    - window.postMessage()
-    - 修改document.domain跨子域
-    - nginx反向代理
-    - JSONP
-    - WebSocket
-    - SSE与WebSocket
-    - CORS
-      - Preflighted Request
-      - Simple Request
-      - Requests with Credential
-- http协议10种请求类型介绍
-  - OPTIONS
-  - HEAD
-  - GET
-  - POST
-  - PUT
-  - DELETE
-  - TRANCE
-  - CONNECT
-  - LINK
-  - UNLINK
+    - [图片ping](#图片ping)
+    - [comet](#comet)
+    - [服务器发送事件(SSE)](#服务器发送事件(SSE))
+    - [window.name+iframe](#window.name+iframe)
+    - [window.postMessage()](#window.postMessage())
+    - [修改document.domain跨子域](#修改document.domain跨子域)
+    - [nginx反向代理](#nginx反向代理)
+    - [JSONP](#JSONP)
+    - [WebSocket](#WebSocket)
+    - [SSE与WebSocket](#SSE与WebSocket)
+    - [CORS](#CORS)
+      - [Preflighted Request](#Preflighted-Request)
+      - [Simple Request](#Simple-Request)
+      - [Requests with Credential](#Requests-with-Credential)
+- [http协议10种请求类型介绍](#http协议10种请求类型介绍)
+  - [OPTIONS](#OPTIONS)
+  - [HEAD](#HEAD)
+  - [GET](#GET)
+  - [POST](#POST)
+  - [PUT](#PUT)
+  - [DELETE](#DELETE)
+  - [TRANCE](#TRANCE)
+  - [CONNECT](#CONNECT)
+  - [LINK](#LINK)
+  - [UNLINK](#UNLINK)
 
 ## FONT-END REQUEST APIS
 
@@ -45,7 +45,7 @@
 
 > XMLHttpRequest是大家普遍比较熟悉的一个浏览器内置对象，所有现代浏览器 (IE7+、Firefox、Chrome、Safari 以及 Opera) 都内建了 XMLHttpRequest 对象。
 
-#### 历史回顾
+#### history
 
 1996年，IE 中首先添加了 iframe 用来实现异步请求获取服务器内容
 
