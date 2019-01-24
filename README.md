@@ -3,40 +3,40 @@
 > summary of some font-end request APIS
 
 目录结构:
-— FONT END REQUEST APIS
-  |— XMLHttpRequest
-  |— Fetch
-     |— 历史
-     |— usage
-     |— 存在的问题
-  |— 当前流行的ajax库剖析
-     |— axios
+- FONT END REQUEST APIS
+  — [XMLHttpRequest](#XMLHttpRequest)
+  — Fetch
+     — 历史
+     — usage
+     — 存在的问题
+  — 当前流行的ajax库剖析
+     — axios
 - [CROSS DOMAIN](#CROSS-DOMAIN)
-　|— 图片ping
-　|— comet
-　|— 服务器发送事件(SSE)
-　|— window.name+iframe
-　|— window.postMessage()
-　|— 修改document.domain跨子域
-　|— nginx反向代理
-　|— JSONP
-　|— WebSocket
-　|— SSE与WebSocket
-　|— CORS
-    |— Preflighted Request
-    |— Simple Request
-    |— Requests with Credential
-— http协议10种请求类型介绍
-  |— OPTIONS
-  |— HEAD
-  |— GET
-  |— POST
-  |— PUT
-  |— DELETE
-  |— TRANCE
-  |— CONNECT
-  |— LINK
-  |— UNLINK
+  - 图片ping
+  — comet
+  — 服务器发送事件(SSE)
+  — window.name+iframe
+  — window.postMessage()
+  — 修改document.domain跨子域
+  — nginx反向代理
+  — JSONP
+  — WebSocket
+  — SSE与WebSocket
+  — CORS
+    — Preflighted Request
+    — Simple Request
+    — Requests with Credential
+- http协议10种请求类型介绍
+  — OPTIONS
+  — HEAD
+  — GET
+  — POST
+  — PUT
+  — DELETE
+  — TRANCE
+  — CONNECT
+  — LINK
+  — UNLINK
 
 ## FONT-END REQUEST APIS
 
