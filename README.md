@@ -2,7 +2,6 @@
 
 > summary of some font-end request APIS
 
-```
 目录结构:
 — FONT END REQUEST APIS
   |— XMLHttpRequest
@@ -12,7 +11,7 @@
      |— 存在的问题
   |— 当前流行的ajax库剖析
      |— axios
-— CROSS DOMAIN
+— [CROSS DOMAIN](#CROSS-DOMAIN)
 　|— 图片ping
 　|— comet
 　|— 服务器发送事件(SSE)
@@ -38,7 +37,6 @@
   |— CONNECT
   |— LINK
   |— UNLINK
-```
 
 ## FONT-END REQUEST APIS
 
