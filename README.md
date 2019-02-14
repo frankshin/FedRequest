@@ -6,6 +6,8 @@
 
 - [FONT-END REQUEST APIS](#FONT-END-REQUEST-APIS)
   - [XMLHttpRequest](#XMLHttpRequest)
+    - [history](#history)
+    - [usage](#usage)
   - [Fetch](#fetch)
     - [history](#history)
     - [usage](#usage)
