@@ -22,6 +22,8 @@
   - [window.postMessage()](#window.postMessage())
   - [修改document.domain跨子域](#修改document.domain跨子域)
   - [nginx反向代理](#nginx反向代理)
+    - [nginx常用命令](#nginx常用命令)
+    - [nginx配置](#nginx配置)
   - [JSONP](#JSONP)
   - [WebSocket](#WebSocket)
   - [SSE与WebSocket](#SSE与WebSocket)
@@ -404,25 +406,51 @@ id：1
 
 ### 修改document.domain跨子域
 
-### nginx反向代理服务器
+### nginx反向代理
 
 > 反向代理（Reverse Proxy）方式是指以代理服务器来接受Internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给Internet上请求连接的客户端
 
 因为服务器之间没有跨域,所以能够请求到数据
 
-#### nginx配置demo：
+#### nginx常用命令
 
-```javascript
-// 这里使用代理服务器61.200.166.130进行请求www.domain.com
-server {
-  listen 80;
-  server_name www.domain.com;
-  # access_log  /var/log/nginx/www.domain.com.access.log;
-  location / {
-    proxy_set_header Host www.domain.com;
-    add_header 'Access-Control-Allow-Origin' 'http://www.domain.com';
-    add_header 'Access-Control-Allow-Credentials' 'true';
-    proxy_pass http://61.200.166.130;
+```js
+sudo nginx  // 开启nginx服务器
+sudo nginx -s reload  // 重启nginx服务器
+sudo nginx -s stop  // 关闭nginx
+```
+
+```js
+nginx -t  // 检查nginx配置，如果出现以下提示表示配置成功
+nginx: the configuration file /usr/local/etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /usr/local/etc/nginx/nginx.conf test is successful
+```
+
+#### nginx配置
+
+```js
+worker_processes 1; // 工作进程数，和CPU核数相同
+events {
+  worker_connections 1024; // 每个进程允许的最大连接数
+}
+http {
+  // upstream模块,处理负债均衡
+  upstream firstdemo {
+    ip_hash; // ip_hash它的作用是如果第一次访问该服务器后就记录，之后再访问都是该服务器
+    server 39.176.155.33;
+    server 47.63.7.93;
+  }
+  // server模块用于实现反向代理，这里使用代理服务器61.200.166.130进行请求www.domain.com
+  server {
+    listen 80;
+    server_name www.domain.com;
+    # access_log  /var/log/nginx/www.domain.com.access.log;
+    location / {
+      proxy_set_header Host www.domain.com;
+      add_header 'Access-Control-Allow-Origin' 'http://www.domain.com';
+      add_header 'Access-Control-Allow-Credentials' 'true';
+      proxy_pass http://61.200.166.130;
+    }
   }
 }
 
