@@ -260,6 +260,17 @@ fetch('doAct.action')
 
 ## CROSS DOMAIN
 
+```
+跨域需要满足以下几个并行条件：
+1、浏览器限制
+2、跨域行为（域名，端口，协议不一样都是跨域）
+　 域名[主域名与子域名也算]不同
+　 端口不同
+　 协议不同
+　 特注：Ip与域名之间网络交互，也属于跨域，如：123.23.23.12 和 www.a.com
+3、XHR（XMLHttpRequest请求）
+```
+
 ### 图片ping
 
 > 图像Ping是与服务器进行简单、单向的跨域通信的一种方式。请求的数据是通过查询字符串形式发送的，而且响应可以是任意内容，但通常是像素图或204响应。通过图像ping，浏览器得不到任何具体的数据，但通过侦听load和error事件，可以知道响应是什么时候接收到的。
@@ -476,9 +487,9 @@ server
 
 ### CORS
 
-For security reasons, browsers restrict cross-origin HTTP requests initiated from within scripts. For example, XMLHttpRequest and the Fetch API follow the same-origin policy. This means that a web application using those APIs can only request HTTP resources from the same origin the application was loaded from, unless the response from the other origin includes the right CORS headers(details see the follows demo).
+出于安全原因，浏览器限制了从脚本内部发起的跨域HTTP请求。 例如，XMLHttpRequest和Fetch API遵循同源策略。 这意味着使用这些API的Web应用程序只能从加载该应用程序的同一来源请求HTTP资源，除非来自其他来源的响应包括正确的CORS标头（详细信息请参见以下演示）。
 
-The CORS mechanism supports secure cross-origin requests and data transfers between browsers and web servers. Modern browsers use CORS in an API container such as XMLHttpRequest or Fetch to help mitigate the risks of cross-origin HTTP requests.
+CORS机制支持安全的跨域请求和浏览器与Web服务器之间的数据传输。 现代浏览器在XMLHttpRequest或Fetch之类的API容器中使用CORS，以帮助减轻跨源HTTP请求的风险。
 
 details here: [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 
